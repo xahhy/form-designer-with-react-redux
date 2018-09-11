@@ -1,5 +1,4 @@
 import React from 'react';
-import Icon from "@material-ui/core/Icon/Icon";
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import TextField from '@material-ui/core/TextField';
 import DeleteIcon from '@material-ui/icons/Delete'

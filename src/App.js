@@ -47,8 +47,7 @@ class App extends Component {
 
     handleClose = (inputFieldType) => {
         this.setState({show: false});
-        console.log(inputFieldType.type);
-        this.setState({fields: [...this.state.fields, {type: inputFieldType.type, id: this.state.fields.length}]})
+        inputFieldType && this.setState({fields: [...this.state.fields, {type: inputFieldType.type, id: this.state.fields.length}]})
     };
 
     handlePreview = () => {

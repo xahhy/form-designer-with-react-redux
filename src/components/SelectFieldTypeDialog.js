@@ -3,13 +3,11 @@ import Dialog from "@material-ui/core/Dialog/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemAvatar from "@material-ui/core/ListItemAvatar/ListItemAvatar";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import Avatar from "@material-ui/core/Avatar/Avatar";
 
 class SelectFieldTypeDialog extends React.Component {
     handleClose = () => {
-        this.props.onClose(this.props.selectedValue);
+        this.props.onClose();
     };
 
     handleListItemClick = value => {
