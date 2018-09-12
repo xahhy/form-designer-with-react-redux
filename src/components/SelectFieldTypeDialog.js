@@ -16,14 +16,13 @@ class SelectFieldTypeDialog extends React.Component {
 
     render() {
         const { classes, inputFields, onClose, selectedValue, ...other } = this.props;
-
         return (
             <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
                 <DialogTitle id="simple-dialog-title">Select Field Type</DialogTitle>
                 <div>
                     <List>
                         {inputFields && inputFields.map(fieldType => (
-                            <ListItem button onClick={() => this.handleListItemClick(fieldType)} key={fieldType.type}>
+                            <ListItem button onClick={() => this.handleListItemClick(fieldType.type)} key={fieldType.type}>
                                 <ListItemText primary={fieldType.description} />
                             </ListItem>
                         ))}
