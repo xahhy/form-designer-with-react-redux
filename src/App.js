@@ -7,6 +7,13 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Icon from "@material-ui/core/Icon/Icon";
 import SelectFieldTypeDialogContainer from "./containers/SelectFieldTypeDialogContainer";
 import {inputFieldTypes} from "./components/FieldTypes";
+import {connect} from "react-redux";
+import {showDialog, showPreview} from "./actions";
+import store from './store'
+
+const mapStateToProps = state => ({
+    preview: state.preview
+});
 
 class App extends Component {
     constructor(props) {
@@ -16,22 +23,25 @@ class App extends Component {
             {type: inputFieldTypes.TextField, description: 'Text Field'},
             {type: inputFieldTypes.DatePickerField, description: 'Date Picker Field'}
         ];
-        this.handleClose = this.handleClose.bind(this);
     }
 
     render() {
         return (
             <div className="App">
-                <Button variant="contained" color="primary" size={"small"} onClick={this.handlePreview}>Preview</Button>
-                <IconButton color="secondary" aria-label="Add an field" onClick={this.createFieldDialog}>
-                    <Icon>add</Icon>
-                </IconButton>
+                <Button variant="contained" color="primary" size={"small"} onClick={this.handlePreview}>
+                    {this.props.preview.preview ? 'Preview' : 'Edit'}
+                </Button>
+                {
+                    this.props.preview.preview &&
+                    <IconButton color="secondary" aria-label="Add an field" onClick={this.createFieldDialog}>
+                        <Icon>add</Icon>
+                    </IconButton>
+                }
+
                 <FormBodyContainer showDelete={this.state.showDelete}>
                 </FormBodyContainer>
                 <SelectFieldTypeDialogContainer
                     inputFields={this.inputFieldTypes}
-                    open={this.state.show}
-                    onClose={this.handleClose}
                 />
             </div>
         );
@@ -42,19 +52,14 @@ class App extends Component {
     };
 
     createFieldDialog = () => {
-        this.setState({show: true})
-    };
-
-    handleClose = (inputFieldType) => {
-        this.setState({show: false});
-        // inputFieldType && this.setState({fields: [...this.state.fields, {type: inputFieldType.type, id: this.state.fields.length}]})
+        this.props.dispatch(showDialog(true))
     };
 
     handlePreview = () => {
-        this.setState({showDelete: !this.state.showDelete})
+        this.props.dispatch(showPreview(!store.getState().preview.preview))
     };
 
 
 }
 
-export default App;
+export default connect(mapStateToProps)(App);

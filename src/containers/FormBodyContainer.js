@@ -3,7 +3,8 @@ import { deleteField } from '../actions'
 import FormBody from "../components/FormBody";
 
 const mapStateToProps = state => ({
-    fields: state.fields
+    fields: state.fields,
+    preview: state.preview
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -4,20 +4,27 @@ import DialogTitle from "@material-ui/core/DialogTitle/DialogTitle";
 import List from "@material-ui/core/List/List";
 import ListItem from "@material-ui/core/ListItem/ListItem";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
+import SelectFieldTypeDialogContainer from "../containers/SelectFieldTypeDialogContainer";
 
 class SelectFieldTypeDialog extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     handleClose = () => {
-        this.props.onClose();
+        this.props.toggleDialog(!this.props.open);
     };
 
     handleListItemClick = value => {
-        this.props.onClose(value);
+        this.props.toggleDialog(!this.props.open);
+        this.props.handleListItemClick(value);
     };
 
     render() {
-        const { classes, inputFields, onClose, selectedValue, ...other } = this.props;
+        const { classes, inputFields, handleListItemClick, toggleDialog, ...other } = this.props;
+        console.log(this.props);
         return (
-            <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" {...other}>
+            <Dialog onClose={this.handleClose} aria-labelledby="simple-dialog-title" open={this.props.open} {...other}>
                 <DialogTitle id="simple-dialog-title">Select Field Type</DialogTitle>
                 <div>
                     <List>
